@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { MetricsContext } from './MetricsContext';
+import { MetricsContext } from '../Contexts/MetricsContext';
 import TotalProductsMetric from './TotalProductsMetric';
 import TotalOrdersMetric from './TotalOrdersMetric';
 import TotalRevenueMetric from './TotalRevenueMetric';
@@ -21,15 +21,14 @@ const MetricsPanel = () => {
   }
 
   return (
-    <article>
-        <section>
-        <TotalProductsMetric totalProducts={totalProducts} />
-        <TotalOrdersMetric totalOrders={totalOrders} />
-        <TotalRevenueMetric totalRevenue={totalRevenue} />
-        <AveragePriceMetric averagePrice={averagePrice} />
-        <TopSellingProductsMetric topSellingProducts={topSellingProducts} />
-        </section>
-    </article>
+    <section>
+      <h1>Panel de Control</h1>
+      <TotalProductsMetric totalProducts={totalProducts} />
+      <TotalOrdersMetric totalOrders={totalOrders} />
+      <TotalRevenueMetric totalRevenue={totalRevenue} />
+      <AveragePriceMetric averagePrice={averagePrice} />
+      <TopSellingProductsMetric topSellingProducts={topSellingProducts} />
+    </section>
   );
 };
 

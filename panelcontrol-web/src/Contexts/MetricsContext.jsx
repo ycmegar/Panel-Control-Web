@@ -1,8 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-export const MetricsContext = createContext();
+const MetricsContext = createContext();
 
-export const MetricsProvider = ({ children }) => {
+const MetricsProvider = ({ children }) => {
   const [totalProducts, setTotalProducts] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
   const [totalRevenue, setTotalRevenue] = useState(0);
@@ -11,63 +11,64 @@ export const MetricsProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const productsResponse = await fetch('https://fakestoreapi.com/products');
+        const productsData = await productsResponse.json();
+
+        const cartsResponse = await fetch('https://fakestoreapi.com/carts');
+        const cartsData = await cartsResponse.json();
+
+        // Calculate totalProducts
+        setTotalProducts(productsData.length);
+
+        // Calculate totalOrders
+        setTotalOrders(cartsData.length);
+
+        // Calculate totalRevenue
+        const revenue = cartsData.reduce((acc, cart) => {
+          const totalPrice = cart.products.reduce((total, product) => {
+            const productData = productsData.find((p) => p.id === product.productId);
+            return total + productData.price * product.quantity;
+          }, 0);
+          return acc + totalPrice;
+        }, 0);
+        setTotalRevenue(revenue);
+
+        // Calculate averagePrice
+        const totalPrices = productsData.reduce((total, product) => total + product.price, 0);
+        const average = totalPrices / productsData.length;
+        setAveragePrice(average);
+
+        // Calculate topSellingProducts
+        const productsCountMap = cartsData.reduce((map, cart) => {
+          cart.products.forEach((product) => {
+            const productId = product.productId;
+            if (map.has(productId)) {
+              map.set(productId, map.get(productId) + 1);
+            } else {
+              map.set(productId, 1);
+            }
+          });
+          return map;
+        }, new Map());
+
+        const sortedProducts = [...productsData].sort((a, b) => {
+          const countA = productsCountMap.get(a.id) || 0;
+          const countB = productsCountMap.get(b.id) || 0;
+          return countB - countA;
+        });
+
+        setTopSellingProducts(sortedProducts.slice(0, 5));
+
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching metrics:', error);
+      }
+    };
+
     fetchData();
   }, []);
-
-  const fetchData = async () => {
-    try {
-      const productsResponse = await fetch(
-        'https://fakestoreapi.com/products'
-      );
-      const productsData = await productsResponse.json();
-      const totalProducts = productsData.length;
-      setTotalProducts(totalProducts);
-
-      const ordersResponse = await fetch('https://fakestoreapi.com/carts');
-      const ordersData = await ordersResponse.json();
-      const totalOrders = ordersData.length;
-      setTotalOrders(totalOrders);
-
-      let totalRevenue = 0;
-      let totalPrice = 0;
-
-      ordersData.forEach((order) => {
-        order.products.forEach((product) => {
-          totalRevenue += product.price;
-          totalPrice += product.price;
-        });
-      });
-
-      setTotalRevenue(totalRevenue);
-      setAveragePrice(totalPrice / totalProducts);
-
-      const productsMap = {};
-
-      ordersData.forEach((order) => {
-        order.products.forEach((product) => {
-          if (productsMap[product.id]) {
-            productsMap[product.id].count++;
-          } else {
-            productsMap[product.id] = {
-              id: product.id,
-              title: product.title,
-              count: 1,
-            };
-          }
-        });
-      });
-
-      const topSellingProducts = Object.values(productsMap).sort(
-        (a, b) => b.count - a.count
-      );
-
-      setTopSellingProducts(topSellingProducts);
-
-      setLoading(false);
-    } catch (error) {
-      console.error('Error cargando datos:', error);
-    }
-  };
 
   return (
     <MetricsContext.Provider
@@ -84,3 +85,5 @@ export const MetricsProvider = ({ children }) => {
     </MetricsContext.Provider>
   );
 };
+
+export { MetricsContext, MetricsProvider };
