@@ -62,7 +62,7 @@ const MetricsProvider = ({ children }) => {
 
         setLoading(false);
       } catch (error) {
-        console.error('Error al obtener métricas:', error);
+        console.error('Error al obtener las métricas:', error);
       }
     };
 

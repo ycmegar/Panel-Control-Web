@@ -23,12 +23,12 @@ const MetricsPanel = () => {
 
   return (
     <section>
-      <h1 className={Style.header}><span className="fa-brands fa-cpanel"></span></h1>
-      <p className={Style.Metricsect}><TotalProductsMetric totalProducts={totalProducts} /></p>
-      <p className={Style.Metricsect}><TotalOrdersMetric totalOrders={totalOrders} /></p>
-      <p className={Style.Metricsect}><TotalRevenueMetric totalRevenue={totalRevenue} /></p>
-      <p className={Style.Metricsect}><AveragePriceMetric averagePrice={averagePrice} /></p>
-      <p className={Style.Metricsect}><TopSellingProductsMetric topSellingProducts={topSellingProducts} /></p>
+      <h2>Métricas</h2>
+      <TotalProductsMetric totalProducts={totalProducts} />
+      <TotalOrdersMetric totalOrders={totalOrders} />
+      <TotalRevenueMetric totalRevenue={totalRevenue} />
+      <AveragePriceMetric averagePrice={averagePrice} />
+      <TopSellingProductsMetric topSellingProducts={topSellingProducts} />
     </section>
   );
 };
