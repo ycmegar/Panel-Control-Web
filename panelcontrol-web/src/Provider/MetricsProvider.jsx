@@ -1,6 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-
-const MetricsContext = createContext();
+import React, { useState, useEffect } from 'react';
+import MetricsContext from '../Context/MetricsContext';
 
 const MetricsProvider = ({ children }) => {
   const [totalProducts, setTotalProducts] = useState(0);
@@ -63,7 +62,7 @@ const MetricsProvider = ({ children }) => {
 
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching metrics:', error);
+        console.error('Error al obtener métricas:', error);
       }
     };
 
@@ -86,4 +85,4 @@ const MetricsProvider = ({ children }) => {
   );
 };
 
-export { MetricsContext, MetricsProvider };
+export default MetricsProvider;

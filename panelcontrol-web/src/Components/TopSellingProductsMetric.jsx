@@ -1,7 +1,8 @@
 import React from 'react';
+import stylesCont from "../estilos/Main.module.css"
 
 const TopSellingProductsMetric = ({ topSellingProducts }) => (
-  <section>
+  <section className={stylesCont.sectionp}>
     <h3>Top Productos más Vendidos</h3>
     <ul>
       {topSellingProducts.map((product) => (
