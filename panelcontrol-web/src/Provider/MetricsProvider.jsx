@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import MetricsContext from '../Context/MetricsContext';
 
 const MetricsProvider = ({ children }) => {
@@ -62,7 +62,7 @@ const MetricsProvider = ({ children }) => {
 
         setLoading(false);
       } catch (error) {
-        console.error('Error al obtener las métricas:', error);
+        console.error('Error al obtener los datos de la API:', error);
       }
     };
 
