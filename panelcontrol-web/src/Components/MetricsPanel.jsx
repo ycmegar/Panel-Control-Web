@@ -18,12 +18,12 @@ const MetricsPanel = () => {
   } = useContext(MetricsContext);
 
   if (loading) {
-    return <p>Cargando...</p>;
+    return <p className={Style.loading}><span className="fa-solid fa-spinner" alt="logo CP" id="logo">Cargando...</span></p>;
   }
 
   return (
     <section>
-      <h2>Métricas</h2>
+      <h2 className={Style.display}>Métricas</h2>
       <TotalProductsMetric totalProducts={totalProducts} />
       <TotalOrdersMetric totalOrders={totalOrders} />
       <TotalRevenueMetric totalRevenue={totalRevenue} />

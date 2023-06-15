@@ -3,13 +3,15 @@ import styles from '../estilos/Header.module.css'
 
 const Header = () => {
   return (
-    <header>
-      <nav>
-      <a href="">Total Products</a>
-      <a href="">Total Orders</a>
-      <a href="">Total Revenue</a>
-      <a href="">Average Price</a>
-      <a href="#sectionBestSelling">Top Selling Products</a>
+    <header className={styles.header}>          
+      <a href="/">
+        <picture className={styles.logo}><span className="fa-brands fa-cpanel" alt="logo CP" id="logo"></span> </picture></a>
+        <nav className={styles.nav}>
+          <a href="#ProductosTotal">Productos</a>
+          <a href="#OrdenTotal">Órdenes</a>
+          <a href="#GananciaTotal">Ganancia</a>
+          <a href="#PrecioPromedio">Precio Promedio</a>
+          <a href="#SectionBestSelling">Top Productos</a>
       </nav>
     </header>
   );

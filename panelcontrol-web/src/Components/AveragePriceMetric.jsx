@@ -1,12 +1,15 @@
 import React from 'react';
-import stylesCont from "../estilos/Main.module.css"
+import stylesCont from "../estilos/AveragePrice.module.css"
+import BarChart from '../Charts/BarChart';
 
 const AveragePriceMetric = ({ averagePrice }) => (
-    <section className={stylesCont.sectionp2}>
-    <h3>Precio Promedio</h3>
-    <p>{`$${averagePrice.toFixed(2)}`}</p>
-    </section>
-    
+    <article className={stylesCont.cont}>
+        <section className={stylesCont.section} id='PrecioPromedio'>
+        <h3>Precio Promedio</h3>
+        <p>{`$${averagePrice.toFixed(2)}`}</p>
+        <BarChart/>
+        </section>
+    </article>
     
 );
 

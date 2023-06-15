@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { MetricsContext } from '../Context/MetricsContext';
+import MetricsContext from '../Context/MetricsContext';
+import {Chart as chartJS} from 'chart.js/auto'
 
 const BarChart = () => {
   const { averagePrice } = useContext(MetricsContext);

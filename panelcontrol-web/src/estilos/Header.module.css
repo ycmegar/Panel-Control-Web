@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: #c2afb3;
+    width: 100%;  
+    padding-left: 1em;
+    padding-right: 2em;
+  }
+.logo{
+    font-size: 100px;
+    font-weight: bold;
+    color: #5C4844;
+    padding-left: 0.8em;
+}
+.nav{
+    float: right;
+    margin-right: 0.8em;
+}
+.nav a{
+    display: inline-block;
+    line-height: 80px;
+    margin: 6px 8px;
+    color: #3d2e2b;
+    font-size: 100%;
+    padding: 20px 6px 20px;
+}
